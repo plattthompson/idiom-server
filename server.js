@@ -49,11 +49,6 @@ app.post('/', (req, res) => {
 	sendToClient();
 });
 
-app.listen(3000, () => {
-	console.log("App is running on port 3000")
+app.listen(process.env.PORT||3000, () => {
+	console.log(`App is running on port ${process.env.PORT}`)
 })
-
-// const PORT = process.env.PORT
-// app.listen(PORT, () => {
-// 	console.log(`App is running on port ${PORT}`)
-// })
