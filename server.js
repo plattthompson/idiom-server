@@ -24,7 +24,7 @@ app.post('/', (req, res) => {
 	const reqObject = req.body;
 	const jsonLength = Object.keys(reqObject).length - 1;
 	let i = 0;
-
+	// retrieves percentiles from database and pushes them to array
 	const getPercentiles = async () => {
 		while(i <= jsonLength) {
 			const gotData = await db.select('percentile').from('wordlist').where('word', reqObject[i]);
@@ -32,19 +32,28 @@ app.post('/', (req, res) => {
 			i++;
 		}
 	};
-
+	// empties array for next request
 	const emptyArray = () => {
 		percentileArray.length = 0;
 	};
+	// finds the largest percentile in array, sends it to client, empties array
 	const sendToClient = async () => {
-		await getPercentiles();
-		await res.json(Math.max(...percentileArray));
-		await emptyArray();
-	}
+		try {
+			await getPercentiles();
+			await res.json(Math.max(...percentileArray));
+			await emptyArray();
+		} catch {
+			res.json("More than 100");
+		}
+	};
 	sendToClient();
+});
+
+app.listen(3000, () => {
+	console.log("App is running on port 3000")
 })
 
-const PORT = process.env.PORT
-app.listen(PORT, () => {
-	console.log(`App is running on port ${PORT}`)
-})
+// const PORT = process.env.PORT
+// app.listen(PORT, () => {
+// 	console.log(`App is running on port ${PORT}`)
+// })
