@@ -18,7 +18,6 @@ app.use(cors());
 
 let percentileArray = [];
 
-app.get('/', (req, res) => {res.send('server is working')})
 app.post('/', (req, res) => {
 	const reqObject = req.body;
 	const jsonLength = Object.keys(reqObject).length - 1;
