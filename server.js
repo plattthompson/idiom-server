@@ -20,6 +20,7 @@ app.use(cors());
 
 let percentileArray = [];
 
+app.get('/', (req, res) => {res.send('server is working')})
 app.post('/', (req, res) => {
 	const reqObject = req.body;
 	const jsonLength = Object.keys(reqObject).length - 1;
@@ -40,8 +41,7 @@ app.post('/', (req, res) => {
 	const sendToClient = async () => {
 		try {
 			await getPercentiles();
-			// await res.json(Math.max(...percentileArray));
-			await res.json('server is working');
+			await res.json(Math.max(...percentileArray));
 			await emptyArray();
 		} catch {
 			res.json("More than 100");
