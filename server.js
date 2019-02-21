@@ -5,16 +5,6 @@ const cors = require('cors');
 
 const app = express();
 
-// const db = knex({
-// 	client: 'pg',
-// 	connection: {
-// 		host: 'postgresql-contoured-18051',
-// 		user: 'plattthompson',
-// 		password: '',
-// 		database: 'common_words'
-// 	}
-// })
-
 const db = knex({
 	client: 'pg',
 	connection: {
