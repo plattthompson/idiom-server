@@ -40,7 +40,8 @@ app.post('/', (req, res) => {
 	const sendToClient = async () => {
 		try {
 			await getPercentiles();
-			await res.json(Math.max(...percentileArray));
+			// await res.json(Math.max(...percentileArray));
+			await res.json('server is working');
 			await emptyArray();
 		} catch {
 			res.json("More than 100");
